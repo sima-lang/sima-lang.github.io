@@ -1,0 +1,1044 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Тимур (Ishira) — Портфолио</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ====================================================
+           НАСТРОЙКИ (МЕНЯЙ ЗДЕСЬ!)
+           ==================================================== */
+        :root {
+            --bg-primary: #08080e;
+            --bg-card: rgba(17, 17, 30, 0.5);
+            --text-primary: #b0ffb0;
+            --text-secondary: #779977;
+            --accent: #00ff41;
+            --border-color: rgba(0, 255, 65, 0.06);
+            --fitz-accent: #774499;
+            --font: 'JetBrains Mono', 'Courier New', monospace;
+        }
+
+        /* ====================================================
+           НЕ МЕНЯТЬ (КРОМЕ КАК ПО ЖЕЛАНИЮ)
+           ==================================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: var(--font);
+            padding: 40px 20px;
+            line-height: 1.7;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* ===== ФОНОВЫЙ ТЕРМИНАЛ ===== */
+        .terminal-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+            opacity: 0.12;
+            font-size: 13px;
+            color: var(--accent);
+            line-height: 1.6;
+            white-space: pre;
+            user-select: none;
+        }
+
+        .terminal-bg .line {
+            display: block;
+            animation: scrollTerminal 18s linear infinite;
+            opacity: 0.5;
+        }
+
+        @keyframes scrollTerminal {
+            0% { transform: translateY(0); opacity: 0.2; }
+            50% { opacity: 0.6; }
+            100% { transform: translateY(-100%); opacity: 0.2; }
+        }
+
+        /* ===== ГЛИТЧ-ОВЕРЛЕЙ ===== */
+        .glitch-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+            display: none;
+            mix-blend-mode: screen;
+        }
+
+        .glitch-overlay.active {
+            display: block;
+            animation: glitchFlash 0.5s ease forwards;
+        }
+
+        @keyframes glitchFlash {
+            0% { background: rgba(0,255,65,0.08); transform: translateX(-5px) skewX(-3deg); }
+            8% { background: rgba(255,0,100,0.15); transform: translateX(7px) skewX(4deg); }
+            16% { background: rgba(0,200,255,0.1); transform: translateX(-6px) skewX(-2deg); }
+            25% { background: rgba(255,0,200,0.12); transform: translateX(8px) skewX(3deg); }
+            33% { background: rgba(0,255,65,0.06); transform: translateX(-3px) skewX(0deg); }
+            50% { background: rgba(255,255,0,0.08); transform: translateX(5px) skewX(-4deg); }
+            66% { background: rgba(0,200,255,0.06); transform: translateX(-4px) skewX(2deg); }
+            80% { background: rgba(255,0,100,0.04); transform: translateX(2px) skewX(-1deg); }
+            100% { background: transparent; transform: translateX(0) skewX(0); }
+        }
+
+        /* ===== ЭФФЕКТ СТАРОГО ТЕЛЕВИЗОРА ===== */
+        .tv-effect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1001;
+            display: none;
+            mix-blend-mode: overlay;
+        }
+
+        .tv-effect.active {
+            display: block;
+            animation: tvStatic 0.8s ease forwards;
+        }
+
+        @keyframes tvStatic {
+            0% { background: repeating-linear-gradient(0deg, rgba(255,255,255,0.03) 0px, rgba(0,0,0,0.1) 2px, rgba(255,255,255,0.01) 4px, rgba(0,0,0,0.05) 6px); transform: scale(1.01) skewX(2deg); opacity: 1; }
+            10% { background: repeating-linear-gradient(0deg, rgba(255,0,0,0.04) 0px, rgba(0,255,0,0.02) 3px, rgba(0,0,255,0.03) 6px, rgba(255,255,255,0.02) 9px); transform: scale(1.02) skewX(-3deg); opacity: 0.9; }
+            20% { background: repeating-linear-gradient(0deg, rgba(255,255,255,0.05) 0px, rgba(0,0,0,0.1) 2px, rgba(255,255,255,0.02) 5px, rgba(0,0,0,0.05) 8px); transform: scale(1.01) skewX(1deg); opacity: 0.8; }
+            35% { background: repeating-linear-gradient(0deg, rgba(0,255,0,0.03) 0px, rgba(255,0,0,0.02) 3px, rgba(0,0,255,0.03) 7px); transform: scale(1.015) skewX(-1deg); opacity: 0.7; }
+            50% { background: repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0px, rgba(0,0,0,0.08) 2px, rgba(255,255,255,0.01) 5px); transform: scale(1.005) skewX(0.5deg); opacity: 0.5; }
+            70% { background: repeating-linear-gradient(0deg, rgba(255,255,255,0.01) 0px, rgba(0,0,0,0.05) 2px); transform: scale(1); opacity: 0.3; }
+            100% { background: transparent; transform: scale(1); opacity: 0; }
+        }
+
+        .tv-lines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1002;
+            display: none;
+            background: repeating-linear-gradient(0deg, transparent 0px, rgba(0,0,0,0.02) 1px, transparent 2px, rgba(255,255,255,0.01) 3px, transparent 4px);
+            animation: tvLines 0.3s linear infinite;
+        }
+
+        .tv-lines.active { display: block; }
+        @keyframes tvLines { 0% { transform: translateY(0); } 100% { transform: translateY(4px); } }
+
+        /* ===== ГЛИТЧ-ТЕКСТ ===== */
+        .glitch-text { transition: 0.1s; }
+        .glitch-text:hover {
+            animation: textGlitch 0.2s ease 2;
+        }
+
+        @keyframes textGlitch {
+            0% { transform: translateX(0); text-shadow: 2px 0 rgba(255,0,100,0.2), -2px 0 rgba(0,200,255,0.2); }
+            25% { transform: translateX(-2px); text-shadow: -3px 0 rgba(255,0,100,0.3), 3px 0 rgba(0,200,255,0.3); }
+            50% { transform: translateX(2px); text-shadow: 3px 0 rgba(255,0,100,0.2), -3px 0 rgba(0,200,255,0.2); }
+            75% { transform: translateX(-1px); text-shadow: -2px 0 rgba(255,0,100,0.1), 2px 0 rgba(0,200,255,0.1); }
+            100% { transform: translateX(0); text-shadow: none; }
+        }
+
+        /* ====================================================
+           ОСНОВНОЙ КОНТЕНТ
+           ==================================================== */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== ШАПКА ===== */
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-bottom: 50px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 30px;
+            position: relative;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 180px;
+            height: 1px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+        }
+
+        .avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 1px solid rgba(0, 255, 65, 0.15);
+            background: #111120;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            overflow: hidden;
+            transition: 0.5s;
+        }
+
+        .avatar:hover {
+            border-color: rgba(0, 255, 65, 0.3);
+            box-shadow: 0 0 80px rgba(0, 255, 65, 0.06);
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .header-info h1 {
+            font-size: 34px;
+            color: var(--accent);
+            text-shadow: 0 0 20px rgba(0, 255, 65, 0.08);
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        .header-info .sub {
+            color: #66bb77;
+            font-size: 16px;
+            margin-top: 4px;
+            opacity: 0.7;
+            letter-spacing: 0.5px;
+        }
+
+        .header-info .nick {
+            color: #88dd88;
+            background: rgba(0, 255, 65, 0.04);
+            padding: 4px 16px;
+            border-radius: 20px;
+            display: inline-block;
+            border: 1px solid rgba(0, 255, 65, 0.06);
+            font-size: 14px;
+            margin-top: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .header-info .desc {
+            color: var(--text-secondary);
+            font-size: 15px;
+            margin-top: 10px;
+            opacity: 0.7;
+            max-width: 600px;
+            letter-spacing: 0.3px;
+        }
+
+        /* ===== НАВЫКИ ===== */
+        .section-title {
+            font-size: 22px;
+            border-left: 2px solid rgba(0, 255, 65, 0.2);
+            padding-left: 18px;
+            margin-bottom: 25px;
+            color: #88dd88;
+            opacity: 0.8;
+            letter-spacing: 1px;
+            font-weight: 400;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 50px;
+        }
+
+        .skill-tag {
+            background: rgba(0, 255, 65, 0.03);
+            border: 1px solid rgba(0, 255, 65, 0.06);
+            padding: 6px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            color: #77aa77;
+            transition: 0.3s;
+            letter-spacing: 0.5px;
+        }
+
+        .skill-tag:hover {
+            background: rgba(0, 255, 65, 0.05);
+            border-color: rgba(0, 255, 65, 0.15);
+            color: #88dd88;
+        }
+
+        /* ===== ПРОЕКТЫ ===== */
+        .projects-header {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 35px;
+            border-left: 2px solid rgba(0, 255, 65, 0.2);
+            padding-left: 18px;
+        }
+
+        .projects-header h2 {
+            font-size: 22px;
+            color: #88dd88;
+            margin: 0;
+            opacity: 0.8;
+            letter-spacing: 1px;
+            font-weight: 400;
+        }
+
+        .projects-header .github-logo {
+            height: 38px;
+            width: auto;
+            filter: invert(75%) sepia(60%) saturate(200%) hue-rotate(80deg) brightness(110%);
+            opacity: 0.5;
+            transition: 0.4s;
+        }
+
+        .projects-header .github-logo:hover {
+            opacity: 0.8;
+            filter: invert(100%) brightness(120%);
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 28px 32px;
+            margin-bottom: 28px;
+            transition: 0.5s;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            border-color: rgba(0, 255, 65, 0.12);
+            box-shadow: 0 0 50px rgba(0, 255, 65, 0.03);
+            transform: translateY(-1px);
+        }
+
+        .project-card .top-row {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+            pointer-events: none;
+        }
+
+        .project-card .icon {
+            font-size: 40px;
+            line-height: 1;
+            filter: grayscale(0.2);
+            pointer-events: none;
+        }
+
+        .project-card h3 {
+            font-size: 20px;
+            color: #aaddaa;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            pointer-events: none;
+        }
+
+        .project-card .status {
+            font-size: 11px;
+            font-weight: 300;
+            background: rgba(0, 255, 65, 0.03);
+            padding: 2px 14px;
+            border-radius: 30px;
+            border: 1px solid rgba(0, 255, 65, 0.06);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            pointer-events: none;
+        }
+
+        .project-card .status.done {
+            border-color: rgba(0, 255, 65, 0.12);
+            color: #55aa66;
+        }
+        .project-card .status.dev {
+            border-color: rgba(255, 107, 0, 0.12);
+            color: #cc7733;
+        }
+        .project-card .status.secret {
+            border-color: rgba(123, 47, 190, 0.12);
+            color: #774499;
+        }
+
+        .project-card .description {
+            color: var(--text-secondary);
+            font-size: 15px;
+            margin: 6px 0 10px 0;
+            padding-left: 4px;
+            opacity: 0.8;
+            letter-spacing: 0.3px;
+            pointer-events: none;
+        }
+
+        .project-card .tech {
+            font-size: 13px;
+            color: #446644;
+            margin-bottom: 10px;
+            padding-left: 4px;
+            letter-spacing: 0.3px;
+            pointer-events: none;
+        }
+
+        .project-card .tech strong {
+            color: #558855;
+            font-weight: 400;
+        }
+
+        .project-card .contribution {
+            font-size: 13px;
+            color: #668866;
+            padding: 12px 16px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            border-left: 2px solid rgba(0, 255, 65, 0.08);
+            margin: 10px 0 12px 0;
+            pointer-events: none;
+        }
+
+        .project-card .contribution span {
+            color: #77bb77;
+            font-weight: 400;
+        }
+
+        .project-card .hint {
+            font-size: 12px;
+            color: #446644;
+            opacity: 0.4;
+            letter-spacing: 0.5px;
+            pointer-events: none;
+        }
+
+        /* ===== ФИТЦ ===== */
+        .fitz-block {
+            margin-top: 60px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 50px;
+        }
+
+        .fitz-block .section-title {
+            border-left-color: rgba(123, 47, 190, 0.15);
+            color: var(--fitz-accent);
+        }
+
+        .fitz-block .project-card {
+            border-color: rgba(123, 47, 190, 0.04);
+            background: rgba(20, 15, 35, 0.4);
+        }
+
+        .fitz-block .project-card:hover {
+            border-color: rgba(123, 47, 190, 0.08);
+        }
+
+        .fitz-block .contribution {
+            border-left-color: rgba(123, 47, 190, 0.08);
+        }
+
+        .fitz-block .contribution span {
+            color: var(--fitz-accent);
+        }
+
+        .fitz-block .secret-note {
+            color: #554477;
+            font-size: 13px;
+            margin-top: 10px;
+            padding-left: 4px;
+            letter-spacing: 0.5px;
+            pointer-events: none;
+        }
+
+        /* ===== ВЫВОД ===== */
+        .summary {
+            margin-top: 60px;
+            padding: 30px 36px;
+            background: rgba(17, 17, 30, 0.4);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .summary h2 {
+            font-size: 22px;
+            border-left: 2px solid rgba(0, 255, 65, 0.12);
+            padding-left: 18px;
+            margin-bottom: 14px;
+            color: #77aa77;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        .summary p {
+            color: var(--text-secondary);
+            font-size: 15px;
+            letter-spacing: 0.3px;
+        }
+
+        .summary strong {
+            color: #77bb77;
+            font-weight: 400;
+        }
+
+        /* ===== КОНТАКТЫ ===== */
+        .contacts {
+            margin-top: 50px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            border-top: 1px solid var(--border-color);
+            padding-top: 30px;
+        }
+
+        .contacts a {
+            color: #557755;
+            text-decoration: none;
+            border: 1px solid var(--border-color);
+            padding: 6px 24px;
+            border-radius: 30px;
+            font-size: 14px;
+            transition: 0.4s;
+            letter-spacing: 0.5px;
+        }
+
+        .contacts a:hover {
+            background: rgba(0, 255, 65, 0.02);
+            border-color: rgba(0, 255, 65, 0.08);
+            color: #77bb77;
+        }
+
+        /* ===== МОДАЛЬНОЕ ОКНО ===== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.88);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            max-width: 600px;
+            width: 100%;
+            background: #111120;
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 40px 45px;
+            position: relative;
+            animation: modalFadeIn 0.4s ease;
+        }
+
+        @keyframes modalFadeIn {
+            0% { opacity: 0; transform: scale(0.96) translateY(10px); filter: blur(2px); }
+            30% { opacity: 0.8; transform: scale(1.01) translateY(0); filter: blur(0); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 14px;
+            right: 20px;
+            font-size: 24px;
+            color: #557755;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: inherit;
+        }
+
+        .modal-close:hover {
+            color: #88dd88;
+        }
+
+        .modal h2 {
+            color: var(--accent);
+            font-size: 24px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .modal .modal-status {
+            font-size: 13px;
+            color: #668866;
+            margin-bottom: 16px;
+            letter-spacing: 0.5px;
+        }
+
+        .modal .modal-desc {
+            color: #88aa88;
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .modal .modal-tech {
+            color: #558855;
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .modal .modal-contribution {
+            color: #668866;
+            font-size: 14px;
+            padding: 14px 18px;
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 8px;
+            border-left: 2px solid rgba(0, 255, 65, 0.08);
+            margin-bottom: 20px;
+        }
+
+        .modal .modal-contribution span {
+            color: #77bb77;
+        }
+
+        .modal .modal-link {
+            color: #559955;
+            text-decoration: none;
+            border: 1px solid var(--border-color);
+            padding: 6px 22px;
+            border-radius: 30px;
+            font-size: 14px;
+            transition: 0.4s;
+            display: inline-block;
+            letter-spacing: 0.5px;
+        }
+
+        .modal .modal-link:hover {
+            background: rgba(0, 255, 65, 0.03);
+            border-color: rgba(0, 255, 65, 0.12);
+            color: #88dd88;
+        }
+
+        .modal .modal-secret {
+            color: var(--fitz-accent);
+            font-size: 16px;
+            text-align: center;
+            padding: 20px 0;
+            letter-spacing: 2px;
+        }
+
+        /* ====================================================
+           АДАПТИВ
+           ==================================================== */
+        @media (max-width: 700px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .project-card .top-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .contacts {
+                justify-content: center;
+            }
+
+            .projects-header {
+                flex-wrap: wrap;
+            }
+
+            .avatar {
+                width: 120px;
+                height: 120px;
+            }
+
+            .modal {
+                padding: 28px 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== ФОНОВЫЙ ТЕРМИНАЛ ===== -->
+<div class="terminal-bg" id="terminalBg"></div>
+
+<!-- ===== ГЛИТЧ-ОВЕРЛЕЙ ===== -->
+<div class="glitch-overlay" id="glitchOverlay"></div>
+
+<!-- ===== ТЕЛЕВИЗОР ===== -->
+<div class="tv-effect" id="tvEffect"></div>
+<div class="tv-lines" id="tvLines"></div>
+
+<!-- ====================================================
+ОСНОВНОЙ КОНТЕНТ
+==================================================== -->
+<div class="container">
+
+    <!-- ====================================================
+    ШАПКА
+    ==================================================== -->
+    <div class="header">
+        <div class="avatar">
+            <!-- ⬇️⬇️⬇️ СЮДА ВСТАВЬ СВОЮ ПРЯМУЮ ССЫЛКУ ⬇️⬇️⬇️ -->
+            <img src="https://avatars.mds.yandex.net/i?id=2cc2e9b7c2e5d4328521665686c81afe5467774f-10254554-images-thumbs&n=13" alt="avatar" />
+            <!-- ⬆️⬆️⬆️ СЮДА ВСТАВЬ СВОЮ ПРЯМУЮ ССЫЛКУ ⬆️⬆️⬆️ -->
+        </div>
+        <div class="header-info">
+            <h1 class="glitch-text">Тимур (Ishira)</h1>
+            <div class="sub">20 лет · Начинающий исследователь</div>
+            <div class="nick">✦ GitHub: sima-lang</div>
+            <div class="desc">
+                Интересуюсь тем, как устроены технологии. Безопасность, автоматизация, ИИ и железо — мои основные направления. Создаю инструменты, которые решают реальные задачи.
+            </div>
+        </div>
+    </div>
+
+    <!-- ====================================================
+    НАВЫКИ
+    ==================================================== -->
+    <h2 class="section-title glitch-text">✦ Навыки</h2>
+    <div class="skill-tags">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">Сети / TCP/IP</span>
+        <span class="skill-tag">Безопасность</span>
+        <span class="skill-tag">Tkinter / PyQt5</span>
+        <span class="skill-tag">Arduino / IoT</span>
+        <span class="skill-tag">Git / GitHub</span>
+        <span class="skill-tag">ИИ (YOLO, TTS)</span>
+        <span class="skill-tag">Распознавание речи</span>
+        <span class="skill-tag">Pandas / Reportlab</span>
+    </div>
+
+    <!-- ====================================================
+    GITHUB ПРОЕКТЫ
+    ==================================================== -->
+    <div class="projects-header">
+        <h2 class="glitch-text">GitHub проекты</h2>
+        <img
+            class="github-logo"
+            src="https://cdn.jsdelivr.net/npm/simple-icons@v12/icons/github.svg"
+            alt="GitHub"
+        />
+    </div>
+
+    <!-- ——— Anti-Theft ——— -->
+    <div class="project-card" data-project="antitheft">
+        <div class="top-row">
+            <div class="icon">🛡️</div>
+            <h3>Anti-Theft <span class="status done">готов</span></h3>
+        </div>
+        <div class="description">
+            Система защиты от удалённого доступа. Отслеживает подключения, блокирует подозрительные IP, отправляет фейковые данные и ведёт логирование.
+        </div>
+        <div class="tech">
+            <strong>стек:</strong> Python · Psutil · Windows Firewall · Cryptography
+        </div>
+        <div class="contribution">
+            <span>вклад:</span> идея · архитектура · оптимизация · тестирование
+        </div>
+        <div class="hint">⏎ нажми для подробностей</div>
+    </div>
+
+    <!-- ——— BIOS Backup ——— -->
+    <div class="project-card" data-project="bios">
+        <div class="top-row">
+            <div class="icon">💾</div>
+            <h3>BIOS Backup <span class="status done">готов</span></h3>
+        </div>
+        <div class="description">
+            Утилита для создания резервной копии BIOS перед обновлением. Определяет модель устройства, проверяет питание и сохраняет информационный бэкап.
+        </div>
+        <div class="tech">
+            <strong>стек:</strong> Python · WMI · Psutil
+        </div>
+        <div class="contribution">
+            <span>вклад:</span> идея · архитектура · адаптация под разные модели · тестирование
+        </div>
+        <div class="hint">⏎ нажми для подробностей</div>
+    </div>
+
+    <!-- ——— Security Scanner Pro ——— -->
+    <div class="project-card" data-project="scanner">
+        <div class="top-row">
+            <div class="icon">🕵️</div>
+            <h3>Security Scanner Pro <span class="status done">готов</span></h3>
+        </div>
+        <div class="description">
+            Профессиональный сканер безопасности сети с графическим интерфейсом. Находит устройства, порты, уязвимости. Поддерживает отчёты, расписание и Telegram-уведомления.
+        </div>
+        <div class="tech">
+            <strong>стек:</strong> Python · Tkinter · Psutil · Pandas · Reportlab
+        </div>
+        <div class="contribution">
+            <span>вклад:</span> идея · архитектура · GUI · оптимизация · тестирование
+        </div>
+        <div class="hint">⏎ нажми для подробностей</div>
+    </div>
+
+    <!-- ——— Ghost Browser ——— -->
+    <div class="project-card" data-project="ghost">
+        <div class="top-row">
+            <div class="icon">👻</div>
+            <h3>Ghost Browser <span class="status dev">в разработке</span></h3>
+        </div>
+        <div class="description">
+            Анонимный браузер со встроенным Tor. Не оставляет следов: история, кэш и куки автоматически уничтожаются.
+        </div>
+        <div class="tech">
+            <strong>стек:</strong> Python · PySide6 · Tor
+        </div>
+        <div class="contribution">
+            <span>вклад:</span> концепция · архитектура · начало разработки
+        </div>
+        <div class="hint">⏎ нажми для подробностей</div>
+    </div>
+
+    <!-- ====================================================
+    ФИТЦ
+    ==================================================== -->
+    <div class="fitz-block">
+        <h2 class="section-title glitch-text">✦ Фитц — ИИ-ассистент</h2>
+
+        <div class="project-card" data-project="fitz">
+            <div class="top-row">
+                <div class="icon">◈</div>
+                <h3>Фитц <span class="status secret">засекречено</span></h3>
+            </div>
+            <div class="description">
+                Личный ИИ-ассистент, интегрированный в систему. Модульная архитектура, активная разработка. Полный функционал не раскрывается.
+            </div>
+            <div class="tech">
+                <strong>стек:</strong> Python · YOLO · TTS · OpenCV · Arduino
+            </div>
+            <div class="contribution">
+                <span>вклад:</span> идея · архитектура (ядро + DLC) · интеграция · тестирование
+            </div>
+            <div class="secret-note">✧ подробности по запросу</div>
+            <div class="hint">⏎ нажми для подробностей</div>
+        </div>
+    </div>
+
+    <!-- ====================================================
+    ВЫВОД
+    ==================================================== -->
+    <div class="summary">
+        <h2 class="glitch-text">✦ вывод</h2>
+        <p>
+            Начинающий разработчик, совмещающий программирование, безопасность, ИИ и работу с железом.
+            Умею проектировать архитектуру, работать с сетями, создавать интерфейсы и интегрировать ИИ.
+            Код пишется с помощью ИИ, но <strong>идеи, архитектура, оптимизация и тестирование — мои</strong>.
+        </p>
+    </div>
+
+    <!-- ====================================================
+    КОНТАКТЫ
+    ==================================================== -->
+    <div class="contacts">
+        <a href="https://github.com/sima-lang" target="_blank">✦ GitHub</a>
+        <a href="mailto:simayory74@gmail.com">✦ Email</a>
+        <a href="#">✦ Telegram</a>
+    </div>
+
+</div>
+
+<!-- ====================================================
+МОДАЛЬНОЕ ОКНО
+==================================================== -->
+<div class="modal-overlay" id="modal">
+    <div class="modal">
+        <button class="modal-close" id="modalClose">✕</button>
+        <div id="modalContent"></div>
+    </div>
+</div>
+
+<!-- ====================================================
+JAVASCRIPT
+==================================================== -->
+<script>
+    // ===== ФОНОВЫЙ ТЕРМИНАЛ =====
+    (function initTerminal() {
+        const bg = document.getElementById('terminalBg');
+        const commands = [
+            '~$ whoami', '~$ ls -la', '~$ nmap -sV 192.168.1.0/24',
+            '~$ ping 8.8.8.8', '~$ traceroute google.com', '~$ ssh root@localhost',
+            '~$ systemctl status', '~$ python3 scanner.py', '~$ ./fitz --init',
+            '~$ cat /etc/passwd', '~$ curl -I https://github.com', '~$ git push origin main',
+            '~$ docker ps -a', '~$ netstat -tulpn', '~$ tcpdump -i eth0'
+        ];
+
+        for (let i = 0; i < 35; i++) {
+            const cmd = commands[Math.floor(Math.random() * commands.length)];
+            const line = document.createElement('span');
+            line.className = 'line';
+            line.textContent = cmd + '  ' + '█'.repeat(Math.floor(Math.random() * 8) + 2);
+            line.style.animationDelay = (Math.random() * 20) + 's';
+            line.style.opacity = (0.15 + Math.random() * 0.25);
+            bg.appendChild(line);
+        }
+    })();
+
+    // ===== ГЛИТЧ + ТЕЛЕВИЗОР =====
+    function triggerTVEffect() {
+        const tvEffect = document.getElementById('tvEffect');
+        const tvLines = document.getElementById('tvLines');
+        tvEffect.classList.remove('active');
+        tvLines.classList.remove('active');
+        void tvEffect.offsetWidth;
+        tvEffect.classList.add('active');
+        tvLines.classList.add('active');
+        setTimeout(() => {
+            tvEffect.classList.remove('active');
+            tvLines.classList.remove('active');
+        }, 900);
+    }
+
+    function triggerGlitch() {
+        const overlay = document.getElementById('glitchOverlay');
+        overlay.classList.remove('active');
+        void overlay.offsetWidth;
+        overlay.classList.add('active');
+        setTimeout(() => { overlay.classList.remove('active'); }, 550);
+    }
+
+    // ===== ДАННЫЕ =====
+    const projectData = {
+        antitheft: {
+            title: '🛡️ Anti-Theft',
+            status: '✅ Готов',
+            desc: 'Программа для защиты от удалённого доступа. Обнаруживает подозрительные подключения к ПК, блокирует их через фаервол, отправляет фейковые данные злоумышленнику и ведёт логирование. Всё работает в фоне.',
+            tech: 'Python · Psutil · Windows Firewall · Cryptography',
+            contribution: 'Идея · Архитектура · Оптимизация · Тестирование · Заливка на GitHub',
+            link: 'https://github.com/sima-lang/anti_theft_'
+        },
+        bios: {
+            title: '💾 BIOS Backup',
+            status: '✅ Готов',
+            desc: 'Утилита для создания резервной копии BIOS перед обновлением. Определяет производителя и модель ноутбука, проверяет питание и создаёт информационный бэкап. Защищает от «кирпича».',
+            tech: 'Python · WMI · Psutil',
+            contribution: 'Идея · Архитектура · Адаптация под HP, Dell, Lenovo, ASUS, Acer · Тестирование · Заливка',
+            link: 'https://github.com/sima-lang/bios_backup'
+        },
+        scanner: {
+            title: '🕵️ Security Scanner Pro',
+            status: '✅ Готов',
+            desc: 'Профессиональный сканер безопасности сети с GUI. Находит устройства, порты, уязвимости. Отчёты, расписание, Telegram.',
+            tech: 'Python · Tkinter · Psutil · Pandas · Reportlab',
+            contribution: 'Идея · Полная архитектура · GUI · Интеграция · Оптимизация · Тестирование',
+            link: 'https://github.com/sima-lang/security-scanner'
+        },
+        ghost: {
+            title: '👻 Ghost Browser',
+            status: '⏸️ В разработке',
+            desc: 'Анонимный браузер со встроенным Tor. Не оставляет следов.',
+            tech: 'Python · PySide6 · Tor',
+            contribution: 'Концепция · Архитектура · Начало разработки',
+            link: null
+        },
+        fitz: {
+            title: '◈ Фитц — ИИ-ассистент',
+            status: '⚡ ЗАСЕКРЕЧЕНО',
+            desc: 'Личный ИИ-ассистент, интегрированный в систему. Модульная архитектура.',
+            tech: 'Python · YOLO · TTS · OpenCV · Arduino',
+            contribution: 'Идея · Полная архитектура (ядро + DLC) · Интеграция',
+            link: null,
+            secret: true
+        }
+    };
+
+    // ===== МОДАЛКА =====
+    const modal = document.getElementById('modal');
+    const modalContent = document.getElementById('modalContent');
+    const modalClose = document.getElementById('modalClose');
+
+    document.querySelectorAll('.project-card').forEach(card => {
+        card.addEventListener('click', function() {
+            triggerGlitch();
+            triggerTVEffect();
+
+            const key = this.dataset.project;
+            const data = projectData[key];
+            if (!data) return;
+
+            if (data.secret) {
+                modalContent.innerHTML = `
+                    <h2>${data.title}</h2>
+                    <div class="modal-status">${data.status}</div>
+                    <div class="modal-secret">🔒 ИНФОРМАЦИЯ ЗАСЕКРЕЧЕНА</div>
+                    <div class="modal-desc">${data.desc}</div>
+                    <div class="modal-tech"><strong>стек:</strong> ${data.tech}</div>
+                    <div class="modal-contribution"><span>вклад:</span> ${data.contribution}</div>
+                `;
+            } else {
+                const linkHtml = data.link
+                    ? `<a class="modal-link" href="${data.link}" target="_blank">→ открыть на GitHub</a>`
+                    : `<span style="color:#446644; font-size:14px;">⏳ скоро</span>`;
+
+                modalContent.innerHTML = `
+                    <h2>${data.title}</h2>
+                    <div class="modal-status">${data.status}</div>
+                    <div class="modal-desc">${data.desc}</div>
+                    <div class="modal-tech"><strong>стек:</strong> ${data.tech}</div>
+                    <div class="modal-contribution"><span>вклад:</span> ${data.contribution}</div>
+                    ${linkHtml}
+                `;
+            }
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    // ===== ЗАКРЫТИЕ =====
+    const closeModal = () => {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    };
+
+    modalClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeModal();
+    });
+</script>
+
+</body>
+</html>
